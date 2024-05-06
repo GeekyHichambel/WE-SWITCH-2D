@@ -7,8 +7,7 @@ class Player():
         self.x = x
         self.y = y
         self.sprite_sheet = pg.image.load(SPRITE_PATH + 'player_idle.png').convert_alpha()
-        self.image = self.sprite_sheet.subsurface(pg.Rect(2 * PLAYER_PIXEL_SIZE, 2 * PLAYER_PIXEL_SIZE, PLAYER_SIZE, PLAYER_SIZE))
-        self.image = pg.transform.scale(self.image, (64,64))
+        self.load_Scale()
         self.rect = self.image.get_rect(bottomleft = (self.x,self.y))
         self.animationFrame = 0
         self.onGround = False
@@ -16,6 +15,10 @@ class Player():
         
         if self.player_inverted:
             self.image = pg.transform.flip(self.image, False, True)
+
+    def load_Scale(self):
+        self.image = self.sprite_sheet.subsurface(pg.Rect(2 * PLAYER_PIXEL_SIZE, 2 * PLAYER_PIXEL_SIZE, PLAYER_SIZE, PLAYER_SIZE))
+        self.image = pg.transform.scale(self.image, (64,64))
         
     def draw(self, surface):     
         surface.blit(self.image, self.rect)
@@ -32,8 +35,8 @@ class Player():
             else:
                 self.rect.y += GRAVITY
                 
-        if self.rect.y > SCREEN_HEIGHT - 64:
-            self.rect.y = SCREEN_HEIGHT - 64
+        if self.rect.y > SCREEN_HEIGHT - 64 :
+            self.rect.y = SCREEN_HEIGHT - 64 
             self.player_inverted = False
             self.onGround = True
             
@@ -46,8 +49,7 @@ class Player():
         
         if action == 'FLIP':
             self.onGround = False
-            self.image = self.sprite_sheet.subsurface(pg.Rect(2 * PLAYER_PIXEL_SIZE, 2 * PLAYER_PIXEL_SIZE, PLAYER_SIZE, PLAYER_SIZE))
-            self.image = pg.transform.scale(self.image, (64,64))
+            self.load_Scale()
             
             if not self.player_inverted:
                 self.image = pg.transform.flip(self.image, False, True)
