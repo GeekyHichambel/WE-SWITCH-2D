@@ -1,12 +1,12 @@
 import pygame as pg
 from Models.Player import player
-from Config import *
+import Config as Global
 
 class MainGame():
     
     def __init__(self):
-        self.background = pg.image.load(IMAGE_PATH + 'background.png').convert()
-        self.background = pg.transform.scale(self.background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.background = pg.image.load(Global.IMAGE_PATH + 'background.png').convert()
+        self.background = pg.transform.scale(self.background, (Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT))
         self.player1 = player.Player(100, 300, inverted= True)
         self.player2 = player.Player(100, 364)
 
@@ -20,20 +20,25 @@ class MainGame():
         self.player2.update()
 
     def run(self, screen):
+        
         for event in pg.event.get():
             
             if event.type == pg.QUIT:
-                GAME_STATE = False
+                Global.gAME_STATE = False
                 
             elif event.type == pg.KEYDOWN:
                 
-                if event.key == pg.K_ESCAPE:
-                    GAME_STATE = False
+                if event.key == Global.QUIT_KEY:
+                    Global.gAME_STATE = False
                     
-                if event.key == PLAYER1_KEY:
+                if event.key == Global.FULLSCREEN_KEY:
+                    Global.iS_FULLSCREEN = not Global.iS_FULLSCREEN 
+                    screen = pg.display.set_mode((Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT),pg.FULLSCREEN if Global.iS_FULLSCREEN else 0)    
+                    
+                if event.key == Global.PLAYER1_KEY:
                     self.player1.move(action= 'FLIP')
                     
-                if event.key == PLAYER2_KEY:
+                if event.key == Global.PLAYER2_KEY:
                     self.player2.move(action= 'FLIP')
                     
         self.update()

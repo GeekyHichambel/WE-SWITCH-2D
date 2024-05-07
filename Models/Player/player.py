@@ -1,12 +1,12 @@
 import pygame as pg
-from Config import *
+import Config as Global
 
 class Player():
     
     def __init__(self, x, y, inverted = False):
         self.x = x
         self.y = y
-        self.sprite_sheet = pg.image.load(SPRITE_PATH + 'player_idle.png').convert_alpha()
+        self.sprite_sheet = pg.image.load(Global.SPRITE_PATH + 'player_idle.png').convert_alpha()
         self.load_Scale()
         self.rect = self.image.get_rect(bottomleft = (self.x,self.y))
         self.animationFrame = 0
@@ -17,7 +17,7 @@ class Player():
             self.image = pg.transform.flip(self.image, False, True)
 
     def load_Scale(self):
-        self.image = self.sprite_sheet.subsurface(pg.Rect(2 * PLAYER_PIXEL_SIZE, 2 * PLAYER_PIXEL_SIZE, PLAYER_SIZE, PLAYER_SIZE))
+        self.image = self.sprite_sheet.subsurface(pg.Rect(2 * Global.PLAYER_PIXEL_SIZE, 2 * Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
         self.image = pg.transform.scale(self.image, (64,64))
         
     def draw(self, surface):     
@@ -26,17 +26,17 @@ class Player():
     def update(self):
                         
         if self.onGround:
-            self.animate(PLAYER_IDLE_SPEED)
+            self.animate(Global.PLAYER_IDLE_SPEED)
             
         else:
             if self.player_inverted:
-                self.rect.y -= GRAVITY
+                self.rect.y -= Global.GRAVITY
                 
             else:
-                self.rect.y += GRAVITY
+                self.rect.y += Global.GRAVITY
                 
-        if self.rect.y > SCREEN_HEIGHT - 64 :
-            self.rect.y = SCREEN_HEIGHT - 64 
+        if self.rect.y > Global.SCREEN_HEIGHT - 64 :
+            self.rect.y = Global.SCREEN_HEIGHT - 64 
             self.player_inverted = False
             self.onGround = True
             
@@ -62,7 +62,7 @@ class Player():
         if self.animationFrame >= 4:
             self.animationFrame = 0
             
-        self.image = self.sprite_sheet.subsurface(pg.Rect((2 * PLAYER_PIXEL_SIZE) + (int(self.animationFrame) * 1000), 2 * PLAYER_PIXEL_SIZE, PLAYER_SIZE, PLAYER_SIZE))
+        self.image = self.sprite_sheet.subsurface(pg.Rect((2 * Global.PLAYER_PIXEL_SIZE) + (int(self.animationFrame) * 1000), 2 * Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
         self.image = pg.transform.scale(self.image, (64,64))
         
         if self.player_inverted:

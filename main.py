@@ -1,11 +1,12 @@
 import pygame as pg
-from Config import *
+import Config as Global
 from Scenes import MainGame
 #TODO: Player cap not visible in animation or movement.
 #TODO: Map creation with differnet assets and obstacles.
 
-screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pg.FULLSCREEN)
-pg.display.set_caption(GAME_NAME)
+screen = pg.display.set_mode((Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT),pg.FULLSCREEN if Global.iS_FULLSCREEN else 0)
+pg.display.set_caption(Global.GAME_NAME)
+
 
 #Initialization methods
 pg.init()
@@ -15,15 +16,15 @@ clock = pg.time.Clock()
 mainGame = MainGame.MainGame()
 
 #Game Loop
-while GAME_STATE:
+while Global.gAME_STATE:
                 
-    if SCENE == 'START_MENU':
+    if Global.sCENE == 'START_MENU':
         pass
     
-    elif SCENE == 'MAIN_GAME':
+    elif Global.sCENE == 'MAIN_GAME':
         mainGame.run(screen= screen)
         
     pg.display.flip()
-    clock.tick(FPS)    
+    clock.tick(Global.FPS)    
         
 pg.quit()        
