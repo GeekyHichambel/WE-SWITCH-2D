@@ -1,7 +1,6 @@
 import pygame as pg
 import Config as Global
 from Scenes import MainGame
-#TODO: Player cap not visible in animation or movement.
 #TODO: Map creation with differnet assets and obstacles.
 
 screen = pg.display.set_mode((Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT),pg.FULLSCREEN if Global.iS_FULLSCREEN else 0)

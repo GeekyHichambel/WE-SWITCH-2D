@@ -17,7 +17,7 @@ class Player():
             self.image = pg.transform.flip(self.image, False, True)
 
     def load_Scale(self):
-        self.image = self.sprite_sheet.subsurface(pg.Rect(2 * Global.PLAYER_PIXEL_SIZE, 2 * Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+        self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE, Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
         self.image = pg.transform.scale(self.image, (64,64))
         
     def draw(self, surface):     
@@ -62,7 +62,7 @@ class Player():
         if self.animationFrame >= 4:
             self.animationFrame = 0
             
-        self.image = self.sprite_sheet.subsurface(pg.Rect((2 * Global.PLAYER_PIXEL_SIZE) + (int(self.animationFrame) * 1000), 2 * Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+        self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE + (int(self.animationFrame) * 1000), Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
         self.image = pg.transform.scale(self.image, (64,64))
         
         if self.player_inverted:
