@@ -1,5 +1,4 @@
 import pygame as pg
-import time
 import Config as Global
 
 class Player():
@@ -7,20 +6,27 @@ class Player():
     def __init__(self, x, y, inverted = False):
         self.x = x
         self.y = y
-        self.sprite_sheet = pg.image.load(Global.SPRITE_PATH + 'player_idle.png').convert_alpha()
+        self.sprite_sheet = pg.image.load(Global.SPRITE_PATH + 'player_run.png').convert_alpha()
+        self.sprite_sheet_2 = pg.image.load(Global.SPRITE_PATH + 'player2_run.png').convert_alpha()
+        self.isPlayer1 = inverted
         self.load_Scale()
         self.rect = self.image.get_rect(bottomleft = (self.x,self.y))
         self.animationFrame = 0
         self.onGround = False
-        self.onGroundTime = None
         self.player_inverted = inverted
         
         if self.player_inverted:
             self.image = pg.transform.flip(self.image, False, True)
 
     def load_Scale(self):
-        self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE, Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
-        self.image = pg.transform.scale(self.image, (64,64))
+        
+        if self.isPlayer1:
+            self.image = self.sprite_sheet_2.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE, Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+            self.image = pg.transform.scale(self.image, (64,64))   
+            
+        else:
+            self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE, Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+            self.image = pg.transform.scale(self.image, (64,64))
         
     def draw(self, surface):     
         surface.blit(self.image, self.rect)
@@ -28,13 +34,7 @@ class Player():
     def update(self):
                         
         if self.onGround:
-            if self.onGroundTime is None:
-                self.onGroundTime = time.time()
-                
-            else:
-                current_time = time.time()
-                if current_time - self.onGroundTime >= 2:
-                    self.animate(Global.PLAYER_IDLE_SPEED)
+            self.animate(Global.PLAYER_RUN_SPEED)
             
         else:
             if self.player_inverted:
@@ -70,8 +70,13 @@ class Player():
             
         if self.animationFrame >= 4:
             self.animationFrame = 0
+        
+        if self.isPlayer1:
+            self.image = self.sprite_sheet_2.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE + (int(self.animationFrame) * 1000), Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
             
-        self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE + (int(self.animationFrame) * 1000), Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+        else:
+            self.image = self.sprite_sheet.subsurface(pg.Rect(Global.PLAYER_PIXEL_SIZE + (int(self.animationFrame) * 1000), Global.PLAYER_PIXEL_SIZE, Global.PLAYER_SIZE, Global.PLAYER_SIZE))
+           
         self.image = pg.transform.scale(self.image, (64,64))
         
         if self.player_inverted:
