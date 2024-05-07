@@ -1,7 +1,8 @@
 import pygame as pg
 from Config import *
 from Scenes import MainGame
-# TODO: Player cap not visible in animation or movement.
+
+# TODO: Player cap not visible in animation or movement.  
 
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pg.FULLSCREEN)
 pg.display.set_caption(GAME_NAME)
@@ -15,16 +16,6 @@ mainGame = MainGame.MainGame()
 
 #Game Loop
 while GAME_STATE:
-    
-    for event in pg.event.get():
-        
-        if event.type == pg.QUIT:
-            GAME_STATE = False
-
-        elif event.type == pg.KEYDOWN:
-            
-            if event.key == pg.K_ESCAPE:
-                GAME_STATE = False
                 
     if SCENE == 'START_MENU':
         pass

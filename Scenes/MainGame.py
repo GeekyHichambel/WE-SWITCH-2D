@@ -15,18 +15,26 @@ class MainGame():
         self.player1.draw(screen)
         self.player2.draw(screen)
         
-    def update(self):
-        keys = pg.key.get_pressed()
-        
-        if keys[PLAYER1_KEY]:
-            self.player1.move(action= 'FLIP')
-            
-        if keys[PLAYER2_KEY]:
-            self.player2.move(action= 'FLIP')
-            
+    def update(self):        
         self.player1.update()
         self.player2.update()
 
     def run(self, screen):
+        for event in pg.event.get():
+            
+            if event.type == pg.QUIT:
+                GAME_STATE = False
+                
+            elif event.type == pg.KEYDOWN:
+                
+                if event.key == pg.K_ESCAPE:
+                    GAME_STATE = False
+                    
+                if event.key == PLAYER1_KEY:
+                    self.player1.move(action= 'FLIP')
+                    
+                if event.key == PLAYER2_KEY:
+                    self.player2.move(action= 'FLIP')
+                    
         self.update()
         self.draw(screen= screen)       
