@@ -7,8 +7,8 @@ class MainGame():
     def __init__(self):
         self.background = pg.image.load(Global.IMAGE_PATH + 'background.png').convert()
         self.background = pg.transform.scale(self.background, (Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT))
-        self.player1 = player.Player(100, 300, inverted= True)
-        self.player2 = player.Player(100, 364)
+        self.player1 = player.Player(100, 450, inverted= True)
+        self.player2 = player.Player(100, 514)
 
     def draw(self, screen):
         screen.blit(self.background, (0,0))

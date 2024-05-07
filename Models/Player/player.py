@@ -1,4 +1,5 @@
 import pygame as pg
+import time
 import Config as Global
 
 class Player():
@@ -11,6 +12,7 @@ class Player():
         self.rect = self.image.get_rect(bottomleft = (self.x,self.y))
         self.animationFrame = 0
         self.onGround = False
+        self.onGroundTime = None
         self.player_inverted = inverted
         
         if self.player_inverted:
@@ -26,7 +28,13 @@ class Player():
     def update(self):
                         
         if self.onGround:
-            self.animate(Global.PLAYER_IDLE_SPEED)
+            if self.onGroundTime is None:
+                self.onGroundTime = time.time()
+                
+            else:
+                current_time = time.time()
+                if current_time - self.onGroundTime >= 2:
+                    self.animate(Global.PLAYER_IDLE_SPEED)
             
         else:
             if self.player_inverted:
@@ -48,6 +56,7 @@ class Player():
     def move(self, action):
         
         if action == 'FLIP':
+            self.onGroundTime = None
             self.onGround = False
             self.load_Scale()
             

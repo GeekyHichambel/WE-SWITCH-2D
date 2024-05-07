@@ -16,7 +16,7 @@ SOUND_PATH = 'Assets/sounds/'
 PLAYER_SIZE = 800
 PLAYER_PIXEL_SIZE = 100
 PLAYER_IDLE_SPEED = 0.12
-GRAVITY = 5
+GRAVITY = 10
 
 #Global Variables
 
