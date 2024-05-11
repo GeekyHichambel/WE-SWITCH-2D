@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="1000" tileheight="1000" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../../krita/PipeTileset.tsx"/>
+ <tileset firstgid="31" name="Characters" tilewidth="375" tileheight="750" tilecount="2" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0" x="325" y="125" width="375" height="750">
+   <image width="1000" height="1000" source="../../../../../../ /1.png"/>
+  </tile>
+  <tile id="1" x="325" y="125" width="375" height="750">
+   <image width="4000" height="1000" source="../sprites/player2_run.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="33" name="Obstackles" tilewidth="925" tileheight="850" tilecount="6" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0" x="0" y="250" width="925" height="375">
+   <image width="1000" height="1000" source="../sprites/tiles/spikes/Spikes_1.png"/>
+  </tile>
+  <tile id="1" x="0" y="250" width="925" height="375">
+   <image width="1000" height="1000" source="../sprites/tiles/spikes/Spikes_2.png"/>
+  </tile>
+  <tile id="2" x="125" y="100" width="750" height="800">
+   <image width="1000" height="1000" source="../sprites/tiles/saw/Saw.png"/>
+  </tile>
+  <tile id="3" x="125" y="100" width="750" height="800">
+   <image width="1000" height="1000" source="../sprites/tiles/saw/Saw_2.png"/>
+  </tile>
+  <tile id="4" x="100" y="75" width="825" height="850">
+   <image width="1000" height="1000" source="../sprites/tiles/saw/Saw_4.png"/>
+  </tile>
+  <tile id="5" x="100" y="75" width="825" height="850">
+   <image width="1000" height="1000" source="../sprites/tiles/saw/Saw3.png"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="10" height="10">
+  <data encoding="csv">
+30,1,1,1,1,1,1,1,1,4,
+24,0,0,0,0,0,0,0,0,24,
+0,0,0,0,0,0,0,0,0,0,
+0,0,1,1,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,1,1,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+26,0,0,0,0,0,0,0,0,26,
+28,1,1,1,1,1,1,1,1,29
+</data>
+ </layer>
+</map>

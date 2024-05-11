@@ -1,5 +1,6 @@
 import pygame as pg
 from Models.Player import player
+from Levels.Level import TileMap
 import Config as Global
 
 class MainGame():
@@ -7,11 +8,18 @@ class MainGame():
     def __init__(self):
         self.background = pg.image.load(Global.IMAGE_PATH + 'background.png').convert()
         self.background = pg.transform.scale(self.background, (Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT))
-        self.player1 = player.Player(100, 450, inverted= True)
-        self.player2 = player.Player(100, 514)
+        self.game_level = 1
+        self.load_level()
+        self.player1 = player.Player(100, 0, inverted= True)
+        self.player2 = player.Player(100, Global.SCREEN_HEIGHT)
+        
+    def load_level(self):
+        self.level = TileMap(Global.MAP_PATH + f'lvl{self.game_level}.csv')
+        self.level.load_map()
 
     def draw(self, screen):
         screen.blit(self.background, (0,0))
+        self.level.draw_map(screen)
         self.player1.draw(screen)
         self.player2.draw(screen)
         
