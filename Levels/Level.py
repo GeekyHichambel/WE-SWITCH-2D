@@ -7,7 +7,7 @@ class Tile(pg.sprite.Sprite):
     
     def __init__(self, image, x, y):
         super(Tile, self).__init__()
-        self.image = image
+        self.image = image.convert_alpha()
         self.image = pg.transform.scale(self.image, (Global.TILE_SIZE,Global.TILE_SIZE))
         self.x = x
         self.y = y
@@ -92,4 +92,53 @@ class TileMap():
         
         self.map_width, self.map_height = x * Global.TILE_SIZE, y * Global.TILE_SIZE
         return tiles, tuple([self.map_width, self.map_height])
-           
+    
+    def get_collisions(self,tiles,obj):
+        i = 0
+        collisions = []
+        
+        for tile in tiles:
+            if obj.player_inverted:
+                collide_mask = tile.mask.overlap_mask(obj.mask, ((obj.x - 64) - tile.x, (obj.y - 64) - tile.y))
+            else:
+                collide_mask = tile.mask.overlap_mask(obj.mask, (obj.x - tile.x, obj.y - tile.y))
+            
+            if collide_mask.count() > 0:
+                collisions.append(tile) 
+                i+=1
+
+        return i,collisions
+     
+    def check_collisions(self,tiles,obj):
+        if type(obj) == list:
+            for an_object in obj:
+                i, collisions = self.get_collisions(tiles.tile_map, an_object)
+            
+                for tile in collisions:
+                    
+                    if not an_object.onGround:
+                        print(an_object.isPlayer1)
+                        if (tile.y * Global.TILE_SIZE > Global.SCREEN_HEIGHT):
+                            an_object.player_inverted = False
+                        
+                        elif (tile.y * Global.TILE_SIZE < 0):
+                            an_object.player_inverted = True
+                        
+                        an_object.onGround = True                
+                
+        else:    
+            i, collisions = self.get_collisions(tiles.tile_map, obj)
+        
+            for tile in collisions:
+                
+                if not obj.onGround:
+                    print(obj.isPlayer1)
+                    if (tile.y * Global.TILE_SIZE > Global.SCREEN_HEIGHT):
+                        obj.player_inverted = False
+                        
+                    elif (tile.y * Global.TILE_SIZE < 0):
+                        obj.player_inverted = True
+                        
+                    obj.onGround = True 
+            
+                   

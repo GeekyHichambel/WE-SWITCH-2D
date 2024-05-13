@@ -46,14 +46,16 @@ class Player():
                 self.rect.y += Global.GRAVITY
                 
         if self.rect.y > Global.SCREEN_HEIGHT - 64 :
-            self.rect.y = Global.SCREEN_HEIGHT - 64 
-            self.player_inverted = False
-            self.onGround = True
+            print('Went Offscreen')
+            # self.rect.y = Global.SCREEN_HEIGHT - 64 
+            # self.player_inverted = False
+            # self.onGround = True
             
         elif self.rect.y < 0:
-            self.rect.y = 0
-            self.player_inverted = True
-            self.onGround = True
+            print('Went Offscreen')
+            # self.rect.y = 0
+            # self.player_inverted = True
+            # self.onGround = True
         
     def move(self, action):
         

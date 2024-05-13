@@ -10,8 +10,8 @@ class MainGame():
         self.background = pg.transform.scale(self.background, (Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT))
         self.game_level = 1
         self.load_level()
-        self.player1 = player.Player(100, 0, inverted= True)
-        self.player2 = player.Player(100, Global.SCREEN_HEIGHT)
+        self.player1 = player.Player(100, Global.TILE_SIZE + 64, inverted= True)
+        self.player2 = player.Player(100, Global.SCREEN_HEIGHT - Global.TILE_SIZE)
         
     def load_level(self):
         self.level = TileMap(Global.MAP_PATH + f'lvl{self.game_level}.csv')
@@ -48,6 +48,7 @@ class MainGame():
                     
                 if event.key == Global.PLAYER2_KEY:
                     self.player2.move(action= 'FLIP')
-                    
+        
+        self.level.check_collisions(self.level, [self.player1, self.player2])            
         self.update()
         self.draw(screen= screen)       
